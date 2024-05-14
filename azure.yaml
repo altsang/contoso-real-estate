@@ -19,13 +19,9 @@ services:
     language: ts
     host: staticwebapp
     module: app/portal
-    hooks:
-      postpackage:
-        shell: sh
-        interactive: true
-        # Note: the current working directory is ./packages/portal
-        # run: ../../infra/hooks/portal/predeploy.js
-        # Temporarily commented out as the predeploy.js script is not found
+    # The postpackage hook has been removed as the predeploy.js script is not present
+    # and its necessity for the deployment process is unclear.
+    # If required, the correct script path or alternative commands should be provided.
 
   notifications:
     project: packages/notifications
