@@ -4,6 +4,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { RouterModule } from "@angular/router";
 import { UserRole, UserService } from "../user/user.service";
+import { User } from "../../../types"; // Corrected import for User
 
 @Component({
   selector: "app-main-nav",

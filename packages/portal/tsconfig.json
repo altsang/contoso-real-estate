@@ -1,9 +1,8 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
     "esModuleInterop": true,
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -20,8 +19,12 @@
     "target": "ES2022",
     "module": "es2020",
     "lib": ["es2020", "dom"],
-    "types": ["jest", "node"],
-    "useDefineForClassFields": false
+    "types": ["jest", "node", "mongodb"],
+    "useDefineForClassFields": false,
+    "paths": {
+      "*": ["*"],
+      "types": ["types/index"]
+    }
   },
   "noImplicitAny": false,
   "angularCompilerOptions": {

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import * as sioClient from "socket.io-client";
-import { environment } from "src/environments/environment";
+import { environment } from "../../environments/environment";
+import { Listing } from "../../types";
 
 @Injectable({
   providedIn: "root",

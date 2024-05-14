@@ -3,7 +3,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { RouterModule } from "@angular/router";
 import { MainNavComponent } from "./shared/main-nav/main-nav.component";
 import { CommonModule } from "@angular/common";
-import { environment } from "src/environments/environment";
+import { environment } from "../environments/environment";
 
 @Component({
   selector: "app-root",

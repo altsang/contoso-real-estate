@@ -1,6 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { WindowService } from "../core/window/window.service";
 import { RealtimeService } from "./realtime.service";
+import { Listing, ReservationRequest, CheckoutSession } from "../../types"; // Corrected import for Listing, ReservationRequest, and CheckoutSession
 
 @Injectable({
   providedIn: "root",

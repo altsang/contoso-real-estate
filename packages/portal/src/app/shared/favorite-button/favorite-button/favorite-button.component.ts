@@ -4,6 +4,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { FavoriteService } from "../../favorite.service";
 import { UserService } from "../../user/user.service";
 import { Subject, of, Subscription, debounceTime, switchMap } from "rxjs";
+import { Listing, User } from "../../../../types"; // Corrected import for Listing and User
 
 @Component({
   selector: "app-favorite-button",

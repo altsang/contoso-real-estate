@@ -1,6 +1,6 @@
-import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { NotFoundComponent } from "./not-found.component";
 
 describe("NotFoundComponent", () => {
@@ -8,14 +8,24 @@ describe("NotFoundComponent", () => {
   let fixture: ComponentFixture<NotFoundComponent>;
 
   beforeEach(async () => {
-    TestBed.overrideComponent(NotFoundComponent, {
-      set: {
-        schemas: [NO_ERRORS_SCHEMA],
-      },
-    });
+    await TestBed.configureTestingModule({
+      imports: [RouterTestingModule, NotFoundComponent], // Import NotFoundComponent as it is standalone
+      declarations: [],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              data: {},
+            },
+          },
+        },
+      ],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(NotFoundComponent);
-    fixture.autoDetectChanges();
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it("should create", () => {

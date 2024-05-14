@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { User, Reservation } from "../../types"; // Corrected import for User and Reservation
 
 @Injectable({
   providedIn: "root",

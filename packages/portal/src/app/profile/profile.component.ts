@@ -10,6 +10,7 @@ import { FavoriteService } from "../shared/favorite.service";
 import { ListingService } from "../shared/listing.service";
 import { PaymentService } from "../shared/payment.service";
 import { ReservationService } from "../shared/reservation.service";
+import { User, Listing, Reservation, Payment } from "../../types"; // Added import for User, Listing, Reservation, Payment
 
 @Component({
   selector: "app-profile",

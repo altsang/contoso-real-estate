@@ -7,6 +7,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
 import { SearchService } from "../shared/search/search.service";
+import { Listing, SearchResult, CleanResults } from "../../types"; // Added import for Listing, SearchResult, and CleanResults
 
 @Component({
   selector: "app-searchpage",

@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CardComponent } from "../card/card.component";
+import { Listing, User } from "../../../types";
 
 @Component({
   selector: "app-card-list",

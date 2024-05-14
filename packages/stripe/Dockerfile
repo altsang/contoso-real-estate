@@ -17,7 +17,8 @@ ENV NODE_ENV=production
 WORKDIR /app
 COPY ./package*.json ./
 COPY ./packages/stripe/package.json ./packages/stripe/
-RUN npm ci --omit=dev --workspace=stripe-api --cache /tmp/empty-cache
+# Install production dependencies and concurrently
+RUN npm ci --omit=dev --workspace=stripe-api --cache /tmp/empty-cache && npm install concurrently
 COPY --from=build app/packages/stripe/dist packages/stripe/dist
 EXPOSE 4242
 CMD [ "npm", "start", "--workspace=stripe-api" ]

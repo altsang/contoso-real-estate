@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input, OnInit, inject, signal } from "@angular/core";
+import { Component, Input, OnInit, inject } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 import { Navigation, Router } from "@angular/router";
 import { MatMenuModule } from "@angular/material/menu";
 import { BookingFormComponent } from "../shared/booking-form/booking-form.component";
@@ -8,6 +9,7 @@ import { HasRoleDirective } from "../shared/has-role/has-role.directive";
 import { ListingDetailComponent } from "../shared/listing-detail/listing-detail.component";
 import { ListingService } from "../shared/listing.service";
 import { UserRole, UserService } from "../shared/user/user.service";
+import { User, Listing, ReservationRequest } from "../../types"; // Added import for User, Listing, and ReservationRequest
 
 @Component({
   selector: "app-rentalpage",
@@ -29,9 +31,10 @@ export class RentalpageComponent implements OnInit {
   navigation: Navigation | null;
   reviewsMapping: { [k: string]: string } = { "=0": "No reviews", "=1": "1 message", other: "# reviews" };
 
-  listing = signal<Listing>({} as Listing);
-  reviewStars = signal<number[]>([]);
-  isLoading = signal(true);
+  // Refactored to use BehaviorSubject
+  listing = new BehaviorSubject<Listing>({} as Listing);
+  reviewStars = new BehaviorSubject<number[]>([]);
+  isLoading = new BehaviorSubject<boolean>(true);
 
   private router = inject(Router);
   private listingService = inject(ListingService);
@@ -41,7 +44,8 @@ export class RentalpageComponent implements OnInit {
 
   constructor() {
     this.navigation = this.router.getCurrentNavigation();
-    this.listing.set(this.navigation?.extras.state?.["listing"] || {});
+    // Updated to use BehaviorSubject's next method
+    this.listing.next(this.navigation?.extras.state?.["listing"] || {});
     this.user = this.navigation?.extras.state?.["user"] || null;
   }
 
@@ -55,21 +59,23 @@ export class RentalpageComponent implements OnInit {
     const listing = await this.listingService.getListingById(this.listId);
 
     if (listing !== undefined) {
-      this.listing.set(listing);
-      this.isLoading.set(false);
+      // Updated to use BehaviorSubject's next method
+      this.listing.next(listing);
+      this.isLoading.next(false);
     } else {
       this.router.navigate(["/404"]);
     }
 
-    this.reviewStars.set(
+    // Updated to use BehaviorSubject's value property
+    this.reviewStars.next(
       Array(5)
         .fill(0)
-        .map((x, i) => (i < this.listing().reviews_stars ? 1 : 0)),
+        .map((x, i) => (i < this.listing.value.reviews_stars ? 1 : 0)),
     );
   }
 
   async share(platform: string) {
-    await this.listingService.share(platform, this.listing());
+    await this.listingService.share(platform, this.listing.value);
   }
 
   async onRent(reservationDetails: ReservationRequest) {

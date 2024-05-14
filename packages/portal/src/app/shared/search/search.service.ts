@@ -1,5 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { Apollo, gql } from "apollo-angular";
+import { SearchResult } from "../../../types"; // Corrected import for SearchResult
 
 // this is the most basic query to search for listings
 // filtering will need to be added

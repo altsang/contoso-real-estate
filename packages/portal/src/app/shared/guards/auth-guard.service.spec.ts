@@ -6,6 +6,7 @@ import { RouterTestingHarness } from "@angular/router/testing";
 import { of } from "rxjs";
 import { UserRole, UserService } from "../user/user.service";
 import { canActiveAuthGuard } from "./auth-guard.service";
+import { User } from "../../../types"; // Corrected import for User
 
 @Component({
   standalone: true,

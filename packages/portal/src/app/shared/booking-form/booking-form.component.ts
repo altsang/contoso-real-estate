@@ -18,6 +18,7 @@ import { RouterModule } from "@angular/router";
 import { AuthService } from "../authentication/auth.service";
 import { HasRoleDirective } from "../has-role/has-role.directive";
 import { UserRole, UserService } from "../user/user.service";
+import { Listing, ReservationRequest } from '../../../types';
 
 @Component({
   selector: "app-booking-form",
@@ -100,8 +101,8 @@ export class BookingFormComponent implements OnInit {
       (Number(this.listing?.fees?.[3]) || 0) * (1 - (parseInt(this.listing?.fees?.[4], 10) || 0) / 100);
     this.monthlyRentPrice.set(Number(this.listing?.fees?.[3]) || 0);
     this.monthlyRentPriceWithDiscount.set(Math.max(0, rentPriceWithDiscount));
-    this.currency_code = this.listing?.fees?.[5].substring(0, 3);
-    this.currency_symbol.set(this.listing?.fees?.[5].substring(4));
+    this.currency_code = this.listing?.fees?.[5] ? this.listing.fees[5].substring(0, 3) : 'USD';
+    this.currency_symbol.set(this.listing?.fees?.[5] ? this.listing.fees[5].substring(4) : '$');
     this.discount.set(Number(this.listing?.fees?.[4]) || 0);
     this.capacity.set(
       Array(this.listing?.capacity)

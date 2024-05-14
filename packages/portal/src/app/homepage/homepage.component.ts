@@ -10,6 +10,7 @@ import { InfiniteScrollingDirective } from "../shared/infinite-scrolling.directi
 import { ListingService } from "../shared/listing.service";
 import { UserService } from "../shared/user/user.service";
 import { RealtimeService } from "../shared/realtime.service";
+import { Listing, User } from "../../types"; // Added import for Listing and User
 
 @Component({
   selector: "app-homepage",

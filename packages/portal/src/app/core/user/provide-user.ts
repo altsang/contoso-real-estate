@@ -1,5 +1,6 @@
 import { APP_INITIALIZER, EnvironmentProviders, FactoryProvider, makeEnvironmentProviders } from "@angular/core";
 import { UserService } from "../../shared/user/user.service";
+import { User } from "../../../types"; // Corrected import for User
 
 function createInitializeUser(userService: UserService): () => Promise<User> {
   return () => userService.fetchAndStoreUserSession();

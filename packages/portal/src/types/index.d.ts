@@ -1,4 +1,4 @@
-declare interface User {
+export interface User {
   id: string;
   name: string;
   email?: string;
@@ -11,7 +11,7 @@ declare interface User {
   };
 }
 
-declare interface UserClientPrincipal {
+export interface UserClientPrincipal {
   userId: string;
   userDetails: string;
   userRoles: string[];
@@ -19,10 +19,10 @@ declare interface UserClientPrincipal {
   identityProvider: string;
 }
 
-declare type AuthProvider = "aad" | "github" | "google" | "facebook";
-declare type UserRole = "guest" | "renter" | "admin";
+export type AuthProvider = "aad" | "github" | "google" | "facebook";
+export type UserRole = "guest" | "renter" | "admin";
 
-declare interface Listing {
+export interface Listing {
   // we will add attributes so we don't have to write a new component for search
   attributes?: ListingAttributes;
   id: string;
@@ -45,7 +45,7 @@ declare interface Listing {
   $$isFavorited?: boolean;
 }
 
-declare interface ListingAttributes {
+export interface ListingAttributes {
   // we will add attributes so we don't have to write a new component for search
   id: string;
   title: string;
@@ -67,7 +67,7 @@ declare interface ListingAttributes {
   $$isFavorited?: boolean;
 }
 
-declare interface Reviews {
+export interface Reviews {
   id: string;
   createdAt: string;
   rating: number;
@@ -75,7 +75,7 @@ declare interface Reviews {
   user: User;
 }
 
-declare interface StageType {
+export interface StageType {
   title: string;
   subtitle?: string;
   label?: string;
@@ -83,7 +83,7 @@ declare interface StageType {
   img: string;
 }
 
-declare interface Address {
+export interface Address {
   buildingNumber: string;
   city: string;
   country: string;
@@ -93,7 +93,7 @@ declare interface Address {
   position: string;
 }
 
-declare interface Reservation {
+export interface Reservation {
   id: string;
   userId: string;
   listingId: string;
@@ -105,7 +105,7 @@ declare interface Reservation {
   createdAt: Date;
 }
 
-declare interface ReservationRequest {
+export interface ReservationRequest {
   userId: string;
   listingId: string | undefined;
   from: string;
@@ -113,7 +113,7 @@ declare interface ReservationRequest {
   guests: number;
 }
 
-declare interface Payment {
+export interface Payment {
   id: string;
   userId: string;
   reservationId: string;
@@ -124,20 +124,20 @@ declare interface Payment {
   createdAt: Date;
 }
 
-declare interface CheckoutSession {
+export interface CheckoutSession {
   sessionUrl: string;
 }
 
-declare type CheckoutResult = "error" | "success" | "cancel";
+export type CheckoutResult = "error" | "success" | "cancel";
 
-declare interface SearchResult {
+export interface SearchResult {
   listings: CleanResults;
 }
 
-declare interface CleanResults {
+export interface CleanResults {
   data: Listing[];
 }
 
-declare interface ListingsResult {
+export interface ListingsResult {
   attributes: Listing;
 }

@@ -1,6 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { UserRole } from "./user/user.service";
 import { RealtimeService } from "./realtime.service";
+import { Listing, User } from "../../types"; // Corrected import for Listing and User
 
 @Injectable({
   providedIn: "root",

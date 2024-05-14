@@ -6,6 +6,7 @@ import { RouterModule } from "@angular/router";
 import { FavoriteButtonComponent } from "../favorite-button/favorite-button/favorite-button.component";
 import { HasRoleDirective } from "../has-role/has-role.directive";
 import { UserRole } from "../user/user.service";
+import { Listing, User } from "../../../types"; // Added import for Listing and User
 
 @Component({
   selector: "app-card",
