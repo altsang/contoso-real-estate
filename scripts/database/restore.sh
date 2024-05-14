@@ -39,13 +39,13 @@ fi
 
 # Skip for local development
 if [ ! -f /.dockerenv ]; then
-  # Add current public IP to firewall exceptions 
+  # Add current public IP to firewall exceptions
   my_public_ip="$(curl -s https://api.ipify.org)"
 
   echo "Adding current public IP to firewall exceptions..."
   az postgres flexible-server firewall-rule create \
     --resource-group "rg-$AZURE_ENV_NAME" \
-    --name "$CMS_DATABASE_SERVER_NAME" \
+    --name "contoso-db-unique" \
     --rule-name "AllowMyIP" \
     --start-ip-address "$my_public_ip" \
     --end-ip-address "$my_public_ip" \
@@ -63,6 +63,12 @@ fi
 echo "Restoring PostgreSQL Database from $file"
 
 # Restore strapi database ----------------------------------------------------
+# Ensure STRAPI_DATABASE_HOST, STRAPI_DATABASE_USERNAME, and STRAPI_DATABASE_NAME are set
+STRAPI_DATABASE_HOST="${STRAPI_DATABASE_HOST:-contoso-db-unique.postgres.database.azure.com}"
+STRAPI_DATABASE_USERNAME="${STRAPI_DATABASE_USERNAME:-contosoadmin}"
+STRAPI_DATABASE_NAME="${STRAPI_DATABASE_NAME:-flexibleserverdb}"
+# Set STRAPI_DATABASE_PASSWORD from provided credentials
+STRAPI_DATABASE_PASSWORD="${STRAPI_DATABASE_PASSWORD:-oRs8Q~wHjtKARV0I-c3xrTp33XZgkaOv-Fi9HcQ7}"
 PGPASSWORD="$STRAPI_DATABASE_PASSWORD" pg_restore -v \
   --clean \
   --no-owner \
