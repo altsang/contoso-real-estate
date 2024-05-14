@@ -24,7 +24,8 @@ services:
         shell: sh
         interactive: true
         # Note: the current working directory is ./packages/portal
-        run: ../../infra/hooks/portal/predeploy.js
+        # run: ../../infra/hooks/portal/predeploy.js
+        # Temporarily commented out as the predeploy.js script is not found
 
   notifications:
     project: packages/notifications
