@@ -28,5 +28,6 @@ RUN npm install -g concurrently
 RUN if ! type "concurrently" > /dev/null; then echo "Error: concurrently is not installed" && exit 1; fi
 # Copy the built dist directory from the build stage
 COPY --from=build /app/dist ./packages/stripe/dist
+
 EXPOSE 4242
 CMD [ "npm", "start" ]
