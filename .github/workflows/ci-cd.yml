@@ -50,6 +50,11 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Build and Deploy Portal
+        run: |
+          npm run build -- --outputPath=./dist/portal
+          az staticwebapp deploy --name contoso-portal --resource-group rg-ContosoEnv --src-path ./dist/portal --location eastus2
+
       - name: Deploy to Azure
         run: |
           az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
