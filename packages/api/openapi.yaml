@@ -11,7 +11,7 @@ info:
 servers:
   - url: /api
     description: Hosted production endpoint
-  - url: http://localhost:7071/api
+  - url: ${API_BASE_URL}/api
     description: Local dev server
 
 tags:
