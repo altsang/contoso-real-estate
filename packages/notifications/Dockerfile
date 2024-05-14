@@ -11,7 +11,7 @@ RUN npm ci
 FROM node:18-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-RUN addgroup --system --gid 1001 nodejs
+RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 --ingroup nodejs nodejs
 
 COPY --from=deps --chown=nodejs /package.json ./
 COPY --from=deps --chown=nodejs /node_modules ./node_modules
