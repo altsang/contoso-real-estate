@@ -29,9 +29,11 @@
     "node": ">=18.16.0",
     "npm": ">=8"
   },
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  },
   "devDependencies": {
     "azure-functions-core-tools": "4.0.5530",
-    "concurrently": "^7.6.0",
     "git-commit-msg-linter": "^4.2.1",
     "prettier": "^2.7.1",
     "esbuild": "^0.16.7",
