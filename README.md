@@ -29,7 +29,7 @@ description: Intelligent enterprise-grade reference architecture for JavaScript,
 
 # Enterprise-grade Reference Architecture for JavaScript
 
-This repository contains the reference architecture and components for building enterprise-grade modern composable frontends (or micro-frontends) and cloud-native applications. It is a collection of best practices, architecture patterns, and functional components that can be used to build and deploy modern JavaScript applications to Azure. 
+This repository contains the reference architecture and components for building enterprise-grade modern composable frontends (or micro-frontends) and cloud-native applications. It is a collection of best practices, architecture patterns, and functional components that can be used to build and deploy modern JavaScript applications to Azure.
 
 > [!IMPORTANT]
 > The application code is meant to serve as a reference. Please incorporate your security governance, audits and conventions before productionizing.
@@ -44,7 +44,7 @@ The following scenarios are part of the application sample
 
 - [Payments integration with Stripe](./payments-service-scenario.md)
 
-- [Real-time Notifications](./real-time-notifications-scenario.md) 
+- [Real-time Notifications](./real-time-notifications-scenario.md)
 
 - [Portal application](./portal-scenario.md), a main portal entry point, featuring listings, favorites, user authentication and profile
 
@@ -287,3 +287,5 @@ The project has a standalone [Developer Guide](./packages/docs/website/README.md
 ## Want to help?
 
 Want to file a bug, contribute some code, or improve the documentation? Excellent! Read up on our guidelines for [contributing](./CONTRIBUTING.md) and then check out one of our issues in the list: [community-help](https://github.com/Azure-Samples/contoso-real-estate/issues).
+
+<!-- Updated to trigger GitHub Actions workflow -->
