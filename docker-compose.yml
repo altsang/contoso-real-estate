@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: ./packages/stripe
+      dockerfile: Dockerfile
+    ports:
+      - "7071:4242"
+    environment:
+      - NODE_ENV=development
