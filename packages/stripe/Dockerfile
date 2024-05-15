@@ -4,7 +4,8 @@
 # ------------------------------------
 FROM node:18-alpine as build
 WORKDIR /app
-COPY ./package*.json ./
+# Copy the root package.json and package-lock.json into the Docker image
+COPY ../../package*.json ./
 # Copy the current directory contents into the Docker image
 COPY . .
 RUN npm ci --workspace=stripe-api --cache /tmp/empty-cache
@@ -16,7 +17,8 @@ FROM node:18-alpine
 ENV NODE_ENV=production
 
 WORKDIR /app
-COPY ./package*.json ./
+# Copy the root package.json and package-lock.json into the Docker image
+COPY ../../package*.json ./
 # Copy the built stripe package directory from the build stage
 COPY --from=build /app ./packages/stripe
 # Install production dependencies including concurrently globally
