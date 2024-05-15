@@ -36,6 +36,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Start services
+        run: |
+          docker-compose up -d api
+          sleep 10 # Wait for the service to be up and running
+
       - name: Run tests
         run: npm test
 
