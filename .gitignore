@@ -56,3 +56,8 @@ packages/blog/.vscode/settings.json
 # Docker build directories
 webapp_logs/
 deployments/
+
+# Azure deployment logs and directories
+LogFiles/
+azd-starter-bicep/
+webapp_logs.zip
