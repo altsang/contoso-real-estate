@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 # Copy the current directory contents into the Docker image
 COPY . .
-RUN npm ci --cache /tmp/empty-cache
+RUN npm ci
 RUN npm run build:ts
 
 # Run Node.js app
@@ -22,7 +22,7 @@ COPY package*.json ./
 # Copy the built stripe package directory from the build stage
 COPY --from=build /app ./packages/stripe
 # Install production dependencies including concurrently globally
-RUN npm ci --omit=dev --cache /tmp/empty-cache
+RUN npm ci --omit=dev
 RUN npm install -g concurrently
 # Verify that concurrently is installed, if not throw an error
 RUN if ! type "concurrently" > /dev/null; then echo "Error: concurrently is not installed" && exit 1; fi
