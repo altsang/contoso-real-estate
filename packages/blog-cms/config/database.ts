@@ -7,7 +7,10 @@ export default ({ env }) => ({
       database: env("DATABASE_NAME", "blog"),
       user: env("DATABASE_USERNAME", "pg"),
       password: env("DATABASE_PASSWORD", "pg"),
-      ssl: env.bool("DATABASE_SSL", true),
+      ssl: {
+        rejectUnauthorized: env.bool("DATABASE_SSL_STRICT", false),
+        ca: env("DATABASE_CA_CERT", ""),
+      },
     },
   },
 });
