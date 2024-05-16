@@ -48,5 +48,8 @@
     "printWidth": 120,
     "bracketSpacing": true,
     "arrowParens": "avoid"
+  },
+  "resolutions": {
+    "graphql": "^15.5.1"
   }
 }
