@@ -61,3 +61,6 @@ deployments/
 LogFiles/
 azd-starter-bicep/
 webapp_logs.zip
+
+.git-rewrite/
+git-filter-repo/
