@@ -40,15 +40,15 @@ export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
   // Handle response
   if (!response.ok) {
     // Attempt to parse the response body for additional error details
-    let responseBody;
+    let responseBody
     try {
-      responseBody = await response.json();
+      responseBody = await response.json()
     } catch (error) {
-      responseBody = { message: 'Unable to parse response body' };
+      responseBody = { message: "Unable to parse response body" }
     }
-    console.error('Response status:', response.statusText);
-    console.error('Response body:', responseBody);
-    throw new Error(`An error occurred: ${response.statusText}`);
+    console.error("Response status:", response.statusText)
+    console.error("Response body:", responseBody)
+    throw new Error(`An error occurred: ${response.statusText}`)
   }
   const data = await response.json()
   return data
