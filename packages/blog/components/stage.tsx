@@ -3,7 +3,15 @@ import { loadHomePage } from "../lib/services"
 import Nav from "./nav"
 
 const Stage = async () => {
-  const homepage = await loadHomePage()
+  let homepage
+  try {
+    homepage = await loadHomePage()
+  } catch (error) {
+    console.error("Failed to load homepage data:", error)
+    // Handle the error appropriately, e.g., render an error message or redirect
+    return <div>Error loading homepage. Please try again later.</div>
+  }
+
   const portalUrl = process.env.NEXT_PUBLIC_PORTAL_URL || "/"
   return (
     <div className="stage">
@@ -16,7 +24,6 @@ const Stage = async () => {
       <Link href={portalUrl} className="button">
         Visit the portal
       </Link>
-      {/* @ts-expect-error Async Server Component */}
       <Nav />
     </div>
   )
