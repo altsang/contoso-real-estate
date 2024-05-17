@@ -8,3 +8,50 @@ services:
       - "7071:4242"
     environment:
       - NODE_ENV=development
+  strapi:
+    build:
+      context: ./packages/blog-cms
+      dockerfile: Dockerfile
+    ports:
+      - "1337:1337"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=strapi
+      - DATABASE_USERNAME=strapi
+      - DATABASE_PASSWORD=strapi
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+  mongo:
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo:/data/db
+  notifications:
+    build:
+      context: ./packages/notifications
+      dockerfile: Dockerfile
+    ports:
+      - "4300:4300"
+    environment:
+      - NODE_ENV=development
+  blog:
+    build:
+      context: ./packages/blog
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development

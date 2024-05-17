@@ -3,6 +3,7 @@
 import fs from "fs";
 import mime from "mime-types";
 import set from "lodash.set";
+import { Shared } from '@strapi/types';
 import { categories, homepage, writers, articles, global, listings } from "../data/data.json";
 
 async function isFirstRun() {
@@ -91,7 +92,8 @@ async function createEntry({ model, entry, files }: { model: string; entry: any;
     }
 
     // Actually create the entry in Strapi
-    const createdEntry = await strapi.entityService.create(`api::${model}.${model}`, {
+    const contentType = `api::${model}.${model}` as keyof Shared.ContentTypes;
+    const createdEntry = await strapi.entityService.create(contentType, {
       data: entry,
     });
   } catch (e) {
