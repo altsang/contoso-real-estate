@@ -15,24 +15,13 @@ services:
     ports:
       - "1337:1337"
     environment:
-      - NODE_ENV=development
-      - DATABASE_HOST=postgres
+      - NODE_ENV=production
+      - DATABASE_HOST=contoso-db-server.postgres.database.azure.com
       - DATABASE_PORT=5432
-      - DATABASE_NAME=strapi
-      - DATABASE_USERNAME=strapi
-      - DATABASE_PASSWORD=strapi
-    depends_on:
-      - postgres
-  postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_DB: strapi
-      POSTGRES_USER: strapi
-      POSTGRES_PASSWORD: strapi
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - DATABASE_NAME=contoso-db
+      - DATABASE_USERNAME=contoso-admin@contoso-db-server
+      - DATABASE_PASSWORD=Str0ngP@ssw0rd!
+      - DATABASE_SSL=true
   mongo:
     image: mongo:5.0
     ports:
