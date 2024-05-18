@@ -18,13 +18,13 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Cache npm dependencies
+      - name: Cache yarn dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-yarn-
 
       - name: Cache Docker layers
         uses: actions/cache@v3
@@ -34,18 +34,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      - name: Clear npm cache
-        run: npm cache clean --force
-
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
-      - name: Print Node.js and npm versions
+      - name: Print Node.js and yarn versions
         run: |
           echo "Node.js version:"
           node -v
-          echo "npm version:"
-          npm -v
+          echo "yarn version:"
+          yarn -v
 
       - name: Start services
         run: |
@@ -53,7 +50,7 @@ jobs:
           sleep 10 # Wait for the service to be up and running
 
       - name: Run tests
-        run: npm test
+        run: yarn test
 
       - name: Build Docker images
         run: |
@@ -68,7 +65,7 @@ jobs:
 
       - name: Build and Deploy Portal
         run: |
-          npm run build -- --outputPath=./dist/portal
+          yarn build --outputPath=./dist/portal
           az staticwebapp deploy --name contoso-portal --resource-group rg-ContosoEnv --src-path ./dist/portal --location eastus2
 
       - name: Deploy to Azure
