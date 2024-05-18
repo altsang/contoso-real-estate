@@ -16,7 +16,7 @@ services:
       - "1337:1337"
     environment:
       - NODE_ENV=production
-      - DATABASE_HOST=contoso-db-server.postgres.database.azure.com
+      - DATABASE_HOST=contoso-db-unique.postgres.database.azure.com # Updated FQDN for the PostgreSQL server
       - DATABASE_PORT=5432
       - DATABASE_NAME=contoso-db
       - DATABASE_USERNAME=contoso-admin@contoso-db-server
