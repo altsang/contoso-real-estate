@@ -10,7 +10,7 @@ ENV PATH /opt/node_modules/.bin:$PATH
 RUN npm install -g yarn && yarn install
 WORKDIR /opt/app
 COPY ./ .
-RUN npm run build
+RUN yarn build
 
 FROM node:18
 # Installing libvips-dev for sharp Compatibility
@@ -25,6 +25,6 @@ COPY --from=build /opt/node_modules ./node_modules
 ENV PATH /opt/node_modules/.bin:$PATH
 COPY --from=build /opt/app ./
 EXPOSE 1337
-# Install Strapi globally to ensure the strapi command is available
-RUN npm install -g @strapi/strapi@4.5.6
-CMD ["npm", "run","start"]
+# Install Strapi locally to ensure the strapi command is available
+RUN yarn add @strapi/strapi@4.5.6
+CMD ["yarn", "start"]
