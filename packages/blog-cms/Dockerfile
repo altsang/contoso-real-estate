@@ -7,7 +7,7 @@ WORKDIR /opt/
 COPY ./package.json ./
 ENV PATH /opt/node_modules/.bin:$PATH
 # Use yarn to install dependencies
-RUN npm install -g yarn && yarn install --production
+RUN npm install -g yarn && yarn install
 WORKDIR /opt/app
 COPY ./ .
 RUN npm run build
