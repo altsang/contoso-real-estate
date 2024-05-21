@@ -8,8 +8,8 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install production dependencies.
-# If npm ci fails, print the contents of the npm log file
-RUN npm ci || (echo "npm ci failed, printing log" && cat /root/.npm/_logs/*-debug.log && exit 1)
+# If npm install fails, print the contents of the npm log file
+RUN npm install || (echo "npm install failed, printing log" && cat /root/.npm/_logs/*-debug.log && exit 1)
 
 # Copy the rest of the application code
 COPY . .
