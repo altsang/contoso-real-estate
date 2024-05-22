@@ -15,7 +15,13 @@ RUN npm install || (echo "npm install failed, printing log" && cat /root/.npm/_l
 RUN npm install -g azure-functions-core-tools@4 --unsafe-perm=true
 
 # Ensure the global npm packages are in the PATH
-ENV PATH="/usr/local/lib/node_modules/.bin:/usr/local/bin:${PATH}"
+ENV PATH="/usr/local/lib/node_modules/.bin:/usr/local/bin:/usr/local/lib/node_modules/azure-functions-core-tools/bin:${PATH}"
+
+# List the contents of the Azure Functions Core Tools bin directory to verify the presence of the func command
+RUN ls -la /usr/local/lib/node_modules/azure-functions-core-tools/bin
+
+# Install TypeScript globally
+RUN npm install -g typescript
 
 # Copy the rest of the application code
 COPY . .
