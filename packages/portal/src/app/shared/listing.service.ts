@@ -11,34 +11,52 @@ export class ListingService {
   private realtimeService = inject(RealtimeService);
 
   async getListings({ limit = 10, offset = 0 } = {}): Promise<Listing[]> {
-    const resource = await fetch(`/api/listings?limit=${limit}&offset=${offset}`).then(response => {
-      if (response.status === 200) {
-        return response.json();
-      }
-      throw new Error("Error while fetching all listings");
-    });
-    return resource;
+    try {
+      const resource = await fetch(`/api/listings?limit=${limit}&offset=${offset}`).then(response => {
+        if (response.status === 200) {
+          return response.json();
+        }
+        throw new Error("Error while fetching all listings");
+      });
+      return resource;
+    } catch (error) {
+      console.error("Error fetching listings:", error);
+      // Return mock data or an empty array when running locally
+      return [];
+    }
   }
 
   async getFeaturedListings({ limit = 10, offset = 0 } = {}): Promise<Listing[]> {
-    // TODO: prevent loading the same listings multiple times when we hit the end of the list
-    const resource = await fetch(`/api/listings?limit=${limit}&offset=${offset}&featured=true`).then(response => {
-      if (response.status === 200) {
-        return response.json();
-      }
-      throw new Error("Error while fetching featured listings");
-    });
-    return resource;
+    try {
+      // TODO: prevent loading the same listings multiple times when we hit the end of the list
+      const resource = await fetch(`/api/listings?limit=${limit}&offset=${offset}&featured=true`).then(response => {
+        if (response.status === 200) {
+          return response.json();
+        }
+        throw new Error("Error while fetching featured listings");
+      });
+      return resource;
+    } catch (error) {
+      console.error("Error fetching featured listings:", error);
+      // Return mock data or an empty array when running locally
+      return [];
+    }
   }
 
   async getListingById(id: string): Promise<Listing | undefined> {
-    const resource = await fetch(`/api/listings/${id}`).then(response => {
-      if (response.status === 200) {
-        return response.json();
-      }
-      throw new Error("Error while fetching requested listing");
-    });
-    return resource;
+    try {
+      const resource = await fetch(`/api/listings/${id}`).then(response => {
+        if (response.status === 200) {
+          return response.json();
+        }
+        throw new Error("Error while fetching requested listing");
+      });
+      return resource;
+    } catch (error) {
+      console.error("Error fetching listing by ID:", error);
+      // Return undefined when running locally
+      return undefined;
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
