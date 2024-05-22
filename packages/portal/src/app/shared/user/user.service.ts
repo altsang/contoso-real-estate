@@ -57,9 +57,19 @@ export class UserService implements Resolve<User> {
         this.userSource.next(user);
         return user;
       } else {
-        // Running locally, return guest user
-        console.warn("Running in local environment, authentication is not available.");
-        return this.guestUser();
+        // Running locally, return mock user session
+        console.warn("Running in local environment, returning mock user session.");
+        const mockClientPrincipal: UserClientPrincipal = {
+          userId: "mock-user-id",
+          userDetails: "mock-user@example.com",
+          userRoles: ["renter"],
+          identityProvider: "mock-provider",
+          claims: [], // Added the missing claims property
+        };
+        const user = this.authenticatedUser(mockClientPrincipal);
+        this.localStorageService.save("user", user);
+        this.userSource.next(user);
+        return user;
       }
     } catch (error) {
       console.error("Error loading user session:", error);
