@@ -15,7 +15,7 @@ RUN npm install || (echo "npm install failed, printing log" && cat /root/.npm/_l
 RUN npm install -g azure-functions-core-tools@4 --unsafe-perm=true
 
 # Ensure the global npm packages are in the PATH
-ENV PATH="/usr/local/share/.config/yarn/global/node_modules/.bin:${PATH}"
+ENV PATH="/usr/local/share/.config/yarn/global/node_modules/.bin:/usr/local/bin:${PATH}"
 
 # Copy the rest of the application code
 COPY . .
