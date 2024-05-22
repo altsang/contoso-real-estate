@@ -1,3 +1,5 @@
+"use client"
+
 import { notFound } from "next/navigation"
 import { loadArticles, loadArticlesByCategory } from "../lib/services"
 import Card from "./card"
