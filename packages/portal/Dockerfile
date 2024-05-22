@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install the dependencies
 RUN npm install
 
+# Change the working directory to the portal service directory
+WORKDIR /app/packages/portal
+
 # Copy the rest of the application source code
 COPY . .
 
