@@ -33,21 +33,28 @@ export class UserService implements Resolve<User> {
 
   async loadUserSession() {
     try {
-      const response = await fetch("/.auth/me");
-      if (!response.ok) {
-        throw new Error(`Failed to fetch user session: ${response.statusText}`);
-      }
-      const payload = await response.json();
-      const { clientPrincipal }: { clientPrincipal: UserClientPrincipal } = payload;
-      let user = this.guestUser();
+      // Check if running in production environment
+      if (process.env['NODE_ENV'] === 'production') {
+        const response = await fetch("/.auth/me");
+        if (!response.ok) {
+          throw new Error(`Failed to fetch user session: ${response.statusText}`);
+        }
+        const payload = await response.json();
+        const { clientPrincipal }: { clientPrincipal: UserClientPrincipal } = payload;
+        let user = this.guestUser();
 
-      if (clientPrincipal) {
-        user = this.authenticatedUser(clientPrincipal);
-      }
+        if (clientPrincipal) {
+          user = this.authenticatedUser(clientPrincipal);
+        }
 
-      this.localStorageService.save("user", user);
-      this.userSource.next(user);
-      return user;
+        this.localStorageService.save("user", user);
+        this.userSource.next(user);
+        return user;
+      } else {
+        // Running locally, return guest user
+        console.warn("Running in local environment, authentication is not available.");
+        return this.guestUser();
+      }
     } catch (error) {
       console.error("Error loading user session:", error);
       return this.guestUser();
