@@ -11,11 +11,8 @@ COPY package*.json ./
 # If npm install fails, print the contents of the npm log file
 RUN npm install || (echo "npm install failed, printing log" && cat /root/.npm/_logs/*-debug.log && exit 1)
 
-# Install Azure Functions Core Tools
-RUN apk add --no-cache \
-    curl \
-    nodejs \
-    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ azure-functions-core-tools
+# Install Azure Functions Core Tools using npm
+RUN npm install -g azure-functions-core-tools@4 --unsafe-perm=true
 
 # Copy the rest of the application code
 COPY . .
