@@ -38,5 +38,5 @@ RUN which func && echo $PATH
 # List the contents of the Azure Functions Core Tools bin directory before starting the application
 RUN ls -la /usr/local/lib/node_modules/azure-functions-core-tools/bin
 
-# Run the application
-CMD [ "npm", "start" ]
+# Print the location of the func command and the PATH environment variable at runtime
+CMD [ "sh", "-c", "which func && echo $PATH && npm start" ]
