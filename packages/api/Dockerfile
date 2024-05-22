@@ -39,4 +39,4 @@ RUN which func && echo $PATH
 RUN ls -la /usr/local/lib/node_modules/azure-functions-core-tools/bin
 
 # Print the location of the func command and the PATH environment variable at runtime
-CMD [ "sh", "-c", "which func && echo $PATH && func start --typescript" ]
+CMD [ "sh", "-c", "which func && echo $PATH && node /usr/local/lib/node_modules/azure-functions-core-tools/bin/func start --typescript" ]
