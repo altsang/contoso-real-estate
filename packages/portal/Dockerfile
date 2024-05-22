@@ -28,6 +28,9 @@ COPY . .
 # Ensure the Angular workspace files are present
 COPY packages/portal/angular.json packages/portal/tsconfig.json packages/portal/tsconfig.app.json ./
 
+# Set the NODE_ENV environment variable to production for the build step
+ENV NODE_ENV=production
+
 # Build the Angular application for production
 RUN ng build
 
