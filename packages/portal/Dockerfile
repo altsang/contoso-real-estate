@@ -20,7 +20,7 @@ WORKDIR /app/packages/portal
 COPY . .
 
 # Ensure the Angular workspace files are present
-COPY ../../angular.json ../../tsconfig.json ../../tsconfig.app.json ./
+COPY angular.json tsconfig.json tsconfig.app.json ./
 
 # Build the Angular application for production
 RUN ng build
