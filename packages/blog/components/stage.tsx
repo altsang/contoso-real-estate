@@ -1,15 +1,41 @@
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import { loadHomePage } from "../lib/services"
 import Nav from "./nav"
 
-const Stage = async () => {
-  let homepage
-  try {
-    homepage = await loadHomePage()
-  } catch (error) {
-    console.error("Failed to load homepage data:", error)
-    // Handle the error appropriately, e.g., render an error message or redirect
+// Define the type for the homepage data
+interface HomePageData {
+  attributes: {
+    hero: {
+      title: string
+    }
+  }
+}
+
+const Stage = () => {
+  const [homepage, setHomepage] = useState<HomePageData | null>(null)
+  const [error, setError] = useState<Error | null>(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await loadHomePage()
+        setHomepage(data)
+      } catch (error) {
+        console.error("Failed to load homepage data:", error)
+        setError(error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  if (error) {
     return <div>Error loading homepage. Please try again later.</div>
+  }
+
+  if (!homepage) {
+    return <div>Loading...</div>
   }
 
   const portalUrl = process.env.NEXT_PUBLIC_PORTAL_URL || "/"
