@@ -9,6 +9,7 @@ services:
     environment:
       - NODE_ENV=production
       - API_URL=${API_URL}
+    command: tail -f /dev/null  # Keep the container running for manual intervention
   strapi:
     build:
       context: ./packages/blog-cms
