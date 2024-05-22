@@ -23,4 +23,4 @@ RUN npm install -g http-server
 EXPOSE 8080
 
 # Set the command to serve the application
-CMD ["http-server", "dist/portal"]
+CMD ["http-server", "dist/contoso-app"]
