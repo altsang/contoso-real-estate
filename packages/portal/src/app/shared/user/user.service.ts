@@ -10,6 +10,10 @@ export enum UserRole {
   Admin = "admin",
 }
 
+interface CustomWindow extends Window {
+  AZURE_ENV?: string;
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -34,16 +38,12 @@ export class UserService implements Resolve<User> {
   async loadUserSession() {
     try {
       // Check if running in Azure environment
-      const isAzureEnvironment = (window as any).AZURE_ENV === 'true';
+      const isAzureEnvironment = (window as CustomWindow).AZURE_ENV === 'true';
       console.log("Is Azure Environment:", isAzureEnvironment); // Added logging for debugging
       if (isAzureEnvironment) {
         const response = await fetch("/.auth/me");
         if (!response.ok) {
           throw new Error(`Failed to fetch user session: ${response.statusText}`);
-        }
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new Error("Invalid content type, expected application/json");
         }
         const payload = await response.json();
         const { clientPrincipal }: { clientPrincipal: UserClientPrincipal } = payload;
