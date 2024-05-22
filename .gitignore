@@ -64,3 +64,6 @@ webapp_logs.zip
 
 .git-rewrite/
 git-filter-repo/
+
+# Exclude data directory
+data/

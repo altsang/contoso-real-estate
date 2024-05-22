@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy the package.json and package-lock.json files
 COPY package*.json ./
 
+# Set the NODE_OPTIONS environment variable to increase memory limit
+ENV NODE_OPTIONS=--max-old-space-size=4096
+
 # Install the dependencies
 RUN npm install
 
