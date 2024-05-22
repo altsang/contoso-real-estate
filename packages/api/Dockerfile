@@ -32,5 +32,8 @@ RUN npm run build
 # Expose the port the app runs on
 EXPOSE 7071
 
+# Print the location of the func command and the PATH environment variable
+RUN which func && echo $PATH
+
 # Run the application
 CMD [ "npm", "start" ]
