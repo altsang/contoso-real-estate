@@ -10,6 +10,9 @@ COPY package*.json ./
 # Set the NODE_OPTIONS environment variable to increase memory limit
 ENV NODE_OPTIONS=--max-old-space-size=4096
 
+# Set the NODE_ENV environment variable to development
+ENV NODE_ENV=development
+
 # Install the dependencies
 RUN npm install
 
