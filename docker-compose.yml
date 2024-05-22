@@ -7,7 +7,8 @@ services:
     ports:
       - "7071:4242"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
+      - API_URL=${API_URL}
   strapi:
     build:
       context: ./packages/blog-cms
@@ -16,11 +17,11 @@ services:
       - "1337:1337"
     environment:
       - NODE_ENV=production
-      - DATABASE_HOST=contoso-db-unique.postgres.database.azure.com # Updated FQDN for the PostgreSQL server
-      - DATABASE_PORT=5432
-      - DATABASE_NAME=contoso-db
-      - DATABASE_USERNAME=contoso-admin@contoso-db-server
-      - DATABASE_PASSWORD=Str0ngP@ssw0rd!
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - DATABASE_SSL=true
   mongo:
     image: mongo:5.0
@@ -35,7 +36,8 @@ services:
     ports:
       - "4300:4300"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
+      - SERVICE_WEB_PUBSUB_CONNECTION_STRING=${SERVICE_WEB_PUBSUB_CONNECTION_STRING}
   blog:
     build:
       context: ./packages/blog
@@ -43,4 +45,15 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
+      - WEB_APP_URL=${WEB_APP_URL}
+```
+
+This updated `docker-compose.yml` file sets the `NODE_ENV` environment variable to `production` for all services and replaces hardcoded database credentials with environment variables. The environment variables will be securely set in the `.env` file or in the Azure environment.
+
+Next, I will commit these changes to the `no-meta-assets` branch.
+
+```xml
+<shell id="git_commit" exec_dir="/home/ubuntu/contoso-real-estate">
+git add docker-compose.yml && git commit -m "chore: update docker-compose for production deployment" && git push origin no-meta-assets
+</shell>
