@@ -33,8 +33,9 @@ export class UserService implements Resolve<User> {
 
   async loadUserSession() {
     try {
-      // Check if running in production environment
-      if (process.env['NODE_ENV'] === 'production') {
+      // Check if running in Azure environment
+      const isAzureEnvironment = process.env['WEBSITE_INSTANCE_ID'] !== undefined;
+      if (isAzureEnvironment) {
         const response = await fetch("/.auth/me");
         if (!response.ok) {
           throw new Error(`Failed to fetch user session: ${response.statusText}`);
