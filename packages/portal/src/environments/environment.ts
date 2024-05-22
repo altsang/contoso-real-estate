@@ -11,6 +11,8 @@ export const environment = {
   // Set placeholder values for notification URL and Path
   notificationUrl: 'https://placeholder-notification-url',
   notificationPath: '/placeholder-notification-path',
+  // Set AZURE_ENV to false for local development
+  AZURE_ENV: 'false',
 };
 
 /*
