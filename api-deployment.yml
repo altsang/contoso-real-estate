@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  labels:
+    app: contoso-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contoso-api
+  template:
+    metadata:
+      labels:
+        app: contoso-api
+    spec:
+      containers:
+      - name: contoso-api
+        image: altsang/contoso-api:latest
+        ports:
+        - containerPort: 4242
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: API_URL
+          valueFrom:
+            secretKeyRef:
+              name: contoso-secrets
+              key: API_URL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-service
+  labels:
+    app: contoso-api
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 7071
+    targetPort: 4242
+  selector:
+    app: contoso-api
