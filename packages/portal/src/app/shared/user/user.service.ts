@@ -32,19 +32,26 @@ export class UserService implements Resolve<User> {
   }
 
   async loadUserSession() {
-    const response = await fetch("/.auth/me");
-    const payload = await response.json();
-    const { clientPrincipal }: { clientPrincipal: UserClientPrincipal } = payload;
-    let user = this.guestUser();
+    try {
+      const response = await fetch("/.auth/me");
+      if (!response.ok) {
+        throw new Error(`Failed to fetch user session: ${response.statusText}`);
+      }
+      const payload = await response.json();
+      const { clientPrincipal }: { clientPrincipal: UserClientPrincipal } = payload;
+      let user = this.guestUser();
 
-    if (clientPrincipal) {
-      user = this.authenticatedUser(clientPrincipal);
+      if (clientPrincipal) {
+        user = this.authenticatedUser(clientPrincipal);
+      }
+
+      this.localStorageService.save("user", user);
+      this.userSource.next(user);
+      return user;
+    } catch (error) {
+      console.error("Error loading user session:", error);
+      return this.guestUser();
     }
-
-    this.localStorageService.save("user", user);
-
-    this.userSource.next(user);
-    return user;
   }
 
   async currentUser() {
