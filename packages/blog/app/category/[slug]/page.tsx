@@ -11,11 +11,9 @@ export async function generateMetadata() {
 export default async function CategoryPage({ params }) {
   return (
     <>
-      {/* @ts-expect-error Async Server Component */}
       <Stage />
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          {/* @ts-expect-error Async Server Component */}
           <Articles slug={params.slug} />
         </div>
       </div>
