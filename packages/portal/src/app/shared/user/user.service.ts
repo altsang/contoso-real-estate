@@ -41,6 +41,10 @@ export class UserService implements Resolve<User> {
         if (!response.ok) {
           throw new Error(`Failed to fetch user session: ${response.statusText}`);
         }
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("Invalid content type, expected application/json");
+        }
         const payload = await response.json();
         const { clientPrincipal }: { clientPrincipal: UserClientPrincipal } = payload;
         let user = this.guestUser();
