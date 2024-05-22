@@ -47,13 +47,3 @@ services:
     environment:
       - NODE_ENV=production
       - WEB_APP_URL=${WEB_APP_URL}
-```
-
-This updated `docker-compose.yml` file sets the `NODE_ENV` environment variable to `production` for all services and replaces hardcoded database credentials with environment variables. The environment variables will be securely set in the `.env` file or in the Azure environment.
-
-Next, I will commit these changes to the `no-meta-assets` branch.
-
-```xml
-<shell id="git_commit" exec_dir="/home/ubuntu/contoso-real-estate">
-git add docker-compose.yml && git commit -m "chore: update docker-compose for production deployment" && git push origin no-meta-assets
-</shell>
